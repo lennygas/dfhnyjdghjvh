@@ -63,6 +63,7 @@ class Server:
     		if event.type == VkBotEventType.MESSAGE_NEW and event.object.text == "расписание":
     			rtime = datetime.datetime.today().time()
     			times = datetime.time(15)
+                print(rtime)
 
     			if day == 0:
     				if rtime <= times:
