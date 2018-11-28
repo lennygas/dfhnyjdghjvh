@@ -60,7 +60,7 @@ class Server:
     		soup = BeautifulSoup(html, 'lxml')
     		#ofile.close()
 
-    		if event.type == VkBotEventType.MESSAGE_NEW and event.object.text == "!расписание":
+    		if event.type == VkBotEventType.MESSAGE_NEW and event.object.text == "!расп":
     			rtime = datetime.datetime.today().time()
     			times = datetime.time(7)
 
