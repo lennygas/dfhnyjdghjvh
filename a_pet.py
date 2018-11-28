@@ -63,7 +63,6 @@ class Server:
     		if event.type == VkBotEventType.MESSAGE_NEW and event.object.text == "расписание":
     			rtime = datetime.datetime.today().time()
     			times = datetime.time(15)
-                print(rtime)
 
     			if day == 0:
     				if rtime <= times:
@@ -122,9 +121,9 @@ class Server:
     						kab2 = tr.find('td', class_ = 'sch_all sch_room')#Парсим кабинеты, если их 2
 
     						if zan == None:
-    							self.send_message(event.object.peer_id, zan2.text + '\n' 'Кабинет: ' + kab2.text + '\n')
+    							self.send_message(event.object.peer_id, zan2.text + '\n' 'Кабинет: ' + kab2.text + '\n' + rtime)
     						else:
-    							self.send_message(event.object.peer_id, zan.text + '\n' 'Кабинет: ' + kab.text + '\n')
+    							self.send_message(event.object.peer_id, zan.text + '\n' 'Кабинет: ' + kab.text + '\n' + rtime)
     				else:
     					for tr in soup.find_all('tr', at_col = 't4'):
     						zan = tr.find('td', class_ = 'sch_ed')#Парсим занятие
@@ -133,9 +132,9 @@ class Server:
     						kab2 = tr.find('td', class_ = 'sch_all sch_room')#Парсим кабинеты, если их 2
 
     						if zan == None:
-    							self.send_message(event.object.peer_id, zan2.text + '\n' 'Кабинет: ' + kab2.text + '\n')
+    							self.send_message(event.object.peer_id, zan2.text + '\n' 'Кабинет: ' + kab2.text + '\n' + str(rtime))
     						else:
-    							self.send_message(event.object.peer_id, zan.text + '\n' 'Кабинет: ' + kab.text + '\n')
+    							self.send_message(event.object.peer_id, zan.text + '\n' 'Кабинет: ' + kab.text + '\n' + str(rtime))
 
     			elif day == 3:
     				if rtime <= times:
