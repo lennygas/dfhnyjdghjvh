@@ -58,7 +58,7 @@ class Server:
     		json_data = json.load(ofile)
     		html = requests.get(json_data[0]).text
     		soup = BeautifulSoup(html, 'lxml')
-    		#ofile.close()
+    		ofile.close()
 
     		if event.type == VkBotEventType.MESSAGE_NEW and event.object.text == "!расп":
     			rtime = datetime.datetime.today().time()
