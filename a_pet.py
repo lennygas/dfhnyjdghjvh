@@ -64,8 +64,12 @@ class Server:
 				rtime = datetime.datetime.today().time()
 				times = datetime.time(7)
 
+				bydn = "Расписание звонков\n1 пара: 08:30-10:00\n2 пара: 10:10-11:40\n3 пара: 12:20-13:40\n4 пара: 13:50-15:10"
+				subb = "Расписание звонков\n1 пара: 08:30-09:40\n2 пара: 09:50-11:00\n3 пара: 11:10-12:20\n4 пара: 12:30-13:40"
+
 				if day == 0:
 					if rtime <= times:
+						self.send_message(event.object.peer_id, bydn)
 						for tr in soup.find_all('tr', at_col = 't1'):
 							zan = tr.find('td', class_ = 'sch_ed')#Парсим занятие
 							kab = tr.find('td', class_ = 'sch_ed sch_room')#Парсим кабинеты
@@ -77,6 +81,7 @@ class Server:
 							else:
 								self.send_message(event.object.peer_id, zan.text + '\n' 'Кабинет: ' + kab.text + '\n')
 					else:
+						self.send_message(event.object.peer_id, bydn)
 						for tr in soup.find_all('tr', at_col = 't2'):
 							zan = tr.find('td', class_ = 'sch_ed')#Парсим занятие
 							kab = tr.find('td', class_ = 'sch_ed sch_room')#Парсим кабинеты
@@ -90,6 +95,7 @@ class Server:
 
 				elif day == 1:
 					if rtime <= times:
+						self.send_message(event.object.peer_id, bydn)
 						for tr in soup.find_all('tr', at_col = 't2'):
 							zan = tr.find('td', class_ = 'sch_ed')#Парсим занятие
 							kab = tr.find('td', class_ = 'sch_ed sch_room')#Парсим кабинеты
@@ -101,6 +107,7 @@ class Server:
 							else:
 								self.send_message(event.object.peer_id, zan.text + '\n' 'Кабинет: ' + kab.text + '\n')
 					else:
+						self.send_message(event.object.peer_id, bydn)
 						for tr in soup.find_all('tr', at_col = 't3'):
 							zan = tr.find('td', class_ = 'sch_ed')#Парсим занятие
 							kab = tr.find('td', class_ = 'sch_ed sch_room')#Парсим кабинеты
@@ -114,6 +121,7 @@ class Server:
 
 				elif day == 2:
 					if rtime <= times:
+						self.send_message(event.object.peer_id, bydn)
 						for tr in soup.find_all('tr', at_col = 't3'):
 							zan = tr.find('td', class_ = 'sch_ed')#Парсим занятие
 							kab = tr.find('td', class_ = 'sch_ed sch_room')#Парсим кабинеты
@@ -125,6 +133,7 @@ class Server:
 							else:
 								self.send_message(event.object.peer_id, zan.text + '\n' 'Кабинет: ' + kab.text + '\n')
 					else:
+						self.send_message(event.object.peer_id, bydn)
 						for tr in soup.find_all('tr', at_col = 't4'):
 							zan = tr.find('td', class_ = 'sch_ed')#Парсим занятие
 							kab = tr.find('td', class_ = 'sch_ed sch_room')#Парсим кабинеты
@@ -138,6 +147,7 @@ class Server:
 
 				elif day == 3:
 					if rtime <= times:
+						self.send_message(event.object.peer_id, bydn)
 						for tr in soup.find_all('tr', at_col = 't4'):
 							zan = tr.find('td', class_ = 'sch_ed')#Парсим занятие
 							kab = tr.find('td', class_ = 'sch_ed sch_room')#Парсим кабинеты
@@ -149,6 +159,7 @@ class Server:
 							else:
 								self.send_message(event.object.peer_id, zan.text + '\n' 'Кабинет: ' + kab.text + '\n')
 					else:
+						self.send_message(event.object.peer_id, bydn)
 						for tr in soup.find_all('tr', at_col = 't5'):
 							zan = tr.find('td', class_ = 'sch_ed')#Парсим занятие
 							kab = tr.find('td', class_ = 'sch_ed sch_room')#Парсим кабинеты
@@ -162,6 +173,7 @@ class Server:
 
 				elif day == 4:
 					if rtime <= times:
+						self.send_message(event.object.peer_id, bydn)
 						for tr in soup.find_all('tr', at_col = 't5'):
 							zan = tr.find('td', class_ = 'sch_ed')#Парсим занятие
 							kab = tr.find('td', class_ = 'sch_ed sch_room')#Парсим кабинеты
@@ -173,6 +185,7 @@ class Server:
 							else:
 								self.send_message(event.object.peer_id, zan.text + '\n' 'Кабинет: ' + kab.text + '\n')
 					else:
+						self.send_message(event.object.peer_id, subb)
 						for tr in soup.find_all('tr', at_col = 't6'):
 							zan = tr.find('td', class_ = 'sch_ed')#Парсим занятие
 							kab = tr.find('td', class_ = 'sch_ed sch_room')#Парсим кабинеты
@@ -186,6 +199,7 @@ class Server:
 
 				elif day == 5:
 					if rtime <= times:
+						self.send_message(event.object.peer_id, subb)
 						for tr in soup.find_all('tr', at_col = 't6'):
 							zan = tr.find('td', class_ = 'sch_ed')#Парсим занятие
 							kab = tr.find('td', class_ = 'sch_ed sch_room')#Парсим кабинеты
