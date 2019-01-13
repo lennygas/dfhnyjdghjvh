@@ -49,9 +49,9 @@ class Server:
 				a1 = []
 				ofile = open(filename, 'r+')
 				if a3.day % 2 == 0:
-					a1.append('http://a-pet.ru/schedule/?group=%CF%CA%D1-7&even=1')
-				else:
 					a1.append('http://a-pet.ru/schedule/?group=%CF%CA%D1-7&even=0')
+				else:
+					a1.append('http://a-pet.ru/schedule/?group=%CF%CA%D1-7&even=1')
 				json.dump(a1, ofile)
 				ofile.close()
 			ofile = open(filename, 'r')
