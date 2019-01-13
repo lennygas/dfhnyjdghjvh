@@ -215,6 +215,7 @@ class Server:
 					if rtime <= datetime.time(8):
 						self.send_message(event.object.peer_id, f"Я еще не обновил расписание на завтра, дождитесь 16:00")
 					else:
+						self.send_message(event.object.peer_id, bydn)
 						for tr in soup.find_all('tr', at_col = 't1'):
 							zan = tr.find('td', class_ = 'sch_ed')#Парсим занятие
 							kab = tr.find('td', class_ = 'sch_ed sch_room')#Парсим кабинеты
