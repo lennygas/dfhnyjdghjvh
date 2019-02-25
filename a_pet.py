@@ -71,6 +71,56 @@ class Server:
 			bydn = "Расписание звонков в будни\n1 пара: 08:30-10:00\n2 пара: 10:10-11:40\n3 пара: 12:20-13:40\n4 пара: 13:50-15:10"
 			subb = "Расписание звонков в субботу\n1 пара: 08:30-09:40\n2 пара: 09:50-11:00\n3 пара: 11:10-12:20\n4 пара: 12:30-13:40"
 
+			#while event.object.text != "отмена":
+			'''game2 = random.randint(1, 3)
+			if game2 == 1:
+				pl1 = " &#128074;"
+			elif game2 == 2:
+				pl1 = " :v:"
+			else:
+				pl1 = " &#9995;"
+
+			if event.type == VkBotEventType.MESSAGE_NEW and event.object.text == "!кнб":
+				self.send_message(event.object.peer_id, "Выберите один из трех предметов. \n 1 - 👊 2 - ✌ 3 - ✋")
+				try:
+					if event.object.text == "1":
+						self.send_message(event.object.peer_id, "Вы выбрали &#128074;\n Бот выбрал" + str(pl1))
+						if game2 == 1:
+							self.send_message(event.object.peer_id, "Ничья")
+						elif game2 == 2:
+							self.send_message(event.object.peer_id, "Вы Победили")
+						else:
+							self.send_message(event.object.peer_id, "Вы проиграли")
+
+					elif event.object.text == "2":
+						self.send_message(event.object.peer_id, "Вы выбрали :v:\n Бот выбрал" + str(pl1))
+
+						if game2 == 1:
+							self.send_message(event.object.peer_id, "Вы проиграли")
+						elif game2 == 2:
+							self.send_message(event.object.peer_id, "Ничья")
+						else:
+							self.send_message(event.object.peer_id, "Вы Победили")
+
+					elif event.object.text == "3":
+						self.send_message(event.object.peer_id, "Вы выбрали &#9995;\n Бот выбрал" + str(pl1))
+						if game2 == 1:
+							self.send_message(event.object.peer_id, "Вы Победили")
+						elif game2 == 2:
+							self.send_message(event.object.peer_id, "Вы прроиграли")
+						else:
+							self.send_message(event.object.peer_id, "Ничья")
+
+					elif event.object.text == "отмена":
+						self.send_message(event.object.peer_id, "Выход из игры")
+
+					else:
+						self.send_message(event.object.peer_id, "Выберите предметы от 1 до 3")
+						pass
+						continue
+				except:
+					self.send_message(event.object.peer_id, "Выберите предметы от 1 до 3")'''
+
 
 			if event.type == VkBotEventType.MESSAGE_NEW and event.object.text == "!расп":
 
