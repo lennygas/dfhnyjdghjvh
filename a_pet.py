@@ -367,11 +367,14 @@ class Server:
 
 			elif event.type == VkBotEventType.MESSAGE_NEW and event.object.text == "!iq" or event.object.text == "!айку":
 				username = self.get_user_name(event.object.from_id)
+				podkr = ['Ну это просто бог какой-то', 'Произошла подкрутка', 'Пиздец, мой создатель дебил и крутит очки айку для своей герлфренд и себя']
 
 				iq = random.randint(1, 150)
-				if username == "Александра" or username == "Валера":
+				if event.object.from_id == 134371625 or event.object.from_id == 210101893:
 					iq = random.randint(1000, 1500)
-					self.send_message(event.object.peer_id, username + ', ' + "тест на IQ пройден. Ваш результат: " + str(iq) + "\n" + 'Ну это просто бог какой-то')
+					self.send_message(event.object.peer_id, username + ', ' + "тест на IQ пройден. Ваш результат: " + str(iq) + "\n" + random.choice(podkr))
+				elif event.object.from_id == 259758854:
+					self.send_message(event.object.peer_id, username + ', ' + "такому человеку даже тест не нужен, все и так знают, что ты умный")
 				elif iq <= 70:
 					self.send_message(event.object.peer_id, username +  ', ' + "тест на IQ пройден. Ваш результат: " + str(iq) + "\n" + random.choice(iqseventyn))
 				elif iq <= 110:
