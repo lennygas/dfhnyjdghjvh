@@ -365,15 +365,19 @@ class Server:
 				username = self.get_user_name(event.object.from_id)
 				self.send_message(event.object.peer_id, username +  ', ' + random.choice(que))
 
-			elif event.type == VkBotEventType.MESSAGE_NEW and event.object.text == "!iq" or event.object.text == "!айку":
+			elif event.type == VkBotEventType.MESSAGE_NEW and event.object.text == "!ай" or event.object.text == "!айк":
 				username = self.get_user_name(event.object.from_id)
+
 				iq = random.randint(1, 150)
+				iqq = random.randint(1000, 1500)
 				if iq <= 70:
 					self.send_message(event.object.peer_id, username +  ', ' + "тест на IQ пройден. Ваш результат: " + str(iq) + "\n" + random.choice(iqseventyn))
 				elif iq <= 110:
 					self.send_message(event.object.peer_id, username +  ', ' + "тест на IQ пройден. Ваш результат: " + str(iq) + "\n" + random.choice(iqninty))
 				elif iq >= 111:
 					self.send_message(event.object.peer_id, username +  ', ' + "тест на IQ пройден. Ваш результат: " + str(iq) + "\n" + random.choice(iqsuper))
+				elif username == "Александра":
+					self.send_message(event.object.peer_id, username + ', ' + "тест на IQ пройден. Ваш результат: " + str(iqq) + "\n" + 'Ну это просто бог какой-то')
 
 	def send_message(self, peer_id, message):
 		self.vk_api.messages.send(peer_id=peer_id, random_id=0, message=message)
