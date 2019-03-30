@@ -365,7 +365,7 @@ class Server:
 				username = self.get_user_name(event.object.from_id)
 				self.send_message(event.object.peer_id, username +  ', ' + random.choice(que))
 
-			elif event.type == VkBotEventType.MESSAGE_NEW and event.object.text == "!ай" or event.object.text == "!айк":
+			elif event.type == VkBotEventType.MESSAGE_NEW and event.object.text == "!iq" or event.object.text == "!айку":
 				username = self.get_user_name(event.object.from_id)
 
 				iq = random.randint(1, 150)
