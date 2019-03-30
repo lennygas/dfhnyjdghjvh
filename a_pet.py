@@ -66,7 +66,10 @@ class Server:
 
 			'''iq = [45, 23, 76, 57, 49, 15, 0, 65, 46, 17, 3]'''
 
-			que = ['может сразу на завод пойдешь?', 'с тобой все понятно', 'тест на IQ пройден. Ваш результат: ' + str(random.randint(0, 60)), 'пожалуй, я промолчу', 'ну тут только в окно']
+			que = ['может сразу на завод пойдешь?', 'у меня нет слов, одни междометия', 'пожалуй, я промолчу', 'ну тут только в окно']
+			iqseventyn = ['Не удивительно, что ты учишься в АПЭТ', 'Ну, бывает и хуже', 'Хотя бы не в минус', 'Странно, что ты вообще можешь связать речь..', 'IQ не зубы, еще вырастет']
+			iqninty = ['Удивлен, что ты до сих пор учишься тут', 'Рад, что ты лучше некоторых', 'Даже у меня меньше', 'Для завода достаточно']
+			iqsuper = ['Это что, Илон Маск?', 'Почему ты до сих пор живешь на Земле?', 'Ты вообще с этой планеты?']
 
 			bydn = "Расписание звонков в будни\n1 пара: 08:30-10:00\n2 пара: 10:10-11:40\n3 пара: 12:20-13:40\n4 пара: 13:50-15:10"
 			subb = "Расписание звонков в субботу\n1 пара: 08:30-09:40\n2 пара: 09:50-11:00\n3 пара: 11:10-12:20\n4 пара: 12:30-13:40"
@@ -269,9 +272,6 @@ class Server:
 								self.send_message(event.object.peer_id, zan.text + '\n' 'Кабинет: ' + kab.text + '\n')
 
 				elif day == 6:
-					if rtime <= datetime.time(8):
-						self.send_message(event.object.peer_id, f"Я еще не обновил расписание на завтра, дождитесь 16:00")
-					else:
 						self.send_message(event.object.peer_id, bydn)
 						for tr in soup.find_all('tr', at_col = 't1'):
 							zan = tr.find('td', class_ = 'sch_ed')#Парсим занятие
@@ -364,6 +364,16 @@ class Server:
 			elif event.type == VkBotEventType.MESSAGE_NEW and event.object.text == "!расп воскресенье":
 				username = self.get_user_name(event.object.from_id)
 				self.send_message(event.object.peer_id, username +  ', ' + random.choice(que))
+
+			elif event.type == VkBotEventType.MESSAGE_NEW and event.object.text == "!iq" or event.object.text == "!айку":
+				username = self.get_user_name(event.object.from_id)
+				iq = random.randint(1, 150)
+				if iq <= 70:
+					self.send_message(event.object.peer_id, username +  ', ' + "тест на IQ пройден. Ваш результат: " + str(iq) + "\n" + random.choice(iqseventyn))
+				elif iq <= 110:
+					self.send_message(event.object.peer_id, username +  ', ' + "тест на IQ пройден. Ваш результат: " + str(iq) + "\n" + random.choice(iqninty))
+				elif iq >= 111:
+					self.send_message(event.object.peer_id, username +  ', ' + "тест на IQ пройден. Ваш результат: " + str(iq) + "\n" + random.choice(iqsuper))
 
 	def send_message(self, peer_id, message):
 		self.vk_api.messages.send(peer_id=peer_id, random_id=0, message=message)
