@@ -369,14 +369,17 @@ class Server:
 				username = self.get_user_name(event.object.from_id)
 
 				iq = random.randint(1, 150)
-				iqq = random.randint(1000, 1500)
-				if iq <= 70:
+				if username == "Александра" or username == "Валера":
+					iq = random.randint(1000, 1500)
+					self.send_message(event.object.peer_id, username + ', ' + "тест на IQ пройден. Ваш результат: " + str(iq) + "\n" + 'Ну это просто бог какой-то')
+				elif iq <= 70:
 					self.send_message(event.object.peer_id, username +  ', ' + "тест на IQ пройден. Ваш результат: " + str(iq) + "\n" + random.choice(iqseventyn))
 				elif iq <= 110:
 					self.send_message(event.object.peer_id, username +  ', ' + "тест на IQ пройден. Ваш результат: " + str(iq) + "\n" + random.choice(iqninty))
 				elif iq >= 111:
 					self.send_message(event.object.peer_id, username +  ', ' + "тест на IQ пройден. Ваш результат: " + str(iq) + "\n" + random.choice(iqsuper))
-				elif username == "Александра":
+				elif username == "Валера":
+					iq = random.randint(1000, 1500)
 					self.send_message(event.object.peer_id, username + ', ' + "тест на IQ пройден. Ваш результат: " + str(iqq) + "\n" + 'Ну это просто бог какой-то')
 
 	def send_message(self, peer_id, message):
