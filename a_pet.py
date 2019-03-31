@@ -374,7 +374,7 @@ class Server:
 					iq = random.randint(1000, 1500)
 					self.send_message(event.object.peer_id, username + ', ' + "тест на IQ пройден. Ваш результат: " + str(iq) + "\n" + random.choice(podkr))
 				elif event.object.from_id == 259758854:
-					self.send_message(event.object.peer_id, username + ', ' + "такому человеку даже тест не нужен, все и так знают, что ты умный")
+					self.send_message(event.object.peer_id, username + ', ' + "такому человеку даже тест не нужен, все и так знают, что ты умный.")
 				elif iq <= 70:
 					self.send_message(event.object.peer_id, username +  ', ' + "тест на IQ пройден. Ваш результат: " + str(iq) + "\n" + random.choice(iqseventyn))
 				elif iq <= 110:
