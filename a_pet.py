@@ -374,13 +374,20 @@ class Server:
 					iq = random.randint(1000, 1500)
 					self.send_message(event.object.peer_id, username + ', ' + "тест на IQ пройден. Ваш результат: " + str(iq) + "\n" + random.choice(podkr))
 				elif event.object.from_id == 259758854:
-					self.send_message(event.object.peer_id, username + ', ' + "такому человеку даже тест не нужен, все и так знают, что ты умный.")
+					self.send_message(event.object.peer_id, username + ', ' + "тест на IQ пройден. Ваш результат: 1488228")
 				elif iq <= 70:
 					self.send_message(event.object.peer_id, username +  ', ' + "тест на IQ пройден. Ваш результат: " + str(iq) + "\n" + random.choice(iqseventyn))
 				elif iq <= 110:
 					self.send_message(event.object.peer_id, username +  ', ' + "тест на IQ пройден. Ваш результат: " + str(iq) + "\n" + random.choice(iqninty))
 				elif iq >= 111:
 					self.send_message(event.object.peer_id, username +  ', ' + "тест на IQ пройден. Ваш результат: " + str(iq) + "\n" + random.choice(iqsuper))
+
+			elif event.type == VkBotEventType.MESSAGE_NEW and event.object.text == "!монетка":
+				coin = random.randint(0, 1)
+				if coin == 0:
+					self.send_message(event.object.peer_id, "Выпал орел")
+				else:
+					self.send_message(event.object.peer_id, "Выпала решка")
 
 	def send_message(self, peer_id, message):
 		self.vk_api.messages.send(peer_id=peer_id, random_id=0, message=message)
