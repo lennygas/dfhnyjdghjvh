@@ -44,14 +44,14 @@ class Server:
 		for event in self.long_poll.listen():
 
 			filename = "bd.txt"
-			day = datetime.datetime.today().weekday()
+			day = datetime.datetime.today().isoweekday()
 			a3 = datetime.datetime.today().date()
-			if day == 6:
+			if day == 7:
 				a1 = []
 				ofile = open(filename, 'r+')
-				if day == 6 and a3.day % 2 == 0:
+				if a3.day % 2 == 0:
 					a1.append('http://a-pet.ru/schedule/?group=%CF%CA%D1-7&even=0')
-				elif day == 6 and a3.day % 2 != 0:
+				elif a3.day % 2 != 0:
 					a1.append('http://a-pet.ru/schedule/?group=%CF%CA%D1-7&even=1')
 				json.dump(a1, ofile)
 				ofile.close()
@@ -64,8 +64,6 @@ class Server:
 			rtime = datetime.datetime.today().time()
 			times = datetime.time(7)
 
-			'''iq = [45, 23, 76, 57, 49, 15, 0, 65, 46, 17, 3]'''
-
 			que = ['может сразу на завод пойдешь?', 'у меня нет слов, одни междометия', 'пожалуй, я промолчу', 'ну тут только в окно']
 			iqseventyn = ['Не удивительно, что ты учишься в АПЭТ', 'Ну, бывает и хуже', 'Хотя бы не в минус', 'Странно, что ты вообще можешь связать речь..', 'IQ не зубы, еще вырастет']
 			iqninty = ['Удивлен, что ты до сих пор учишься тут', 'Рад, что ты лучше некоторых', 'Даже у меня меньше', 'Для завода достаточно']
@@ -74,219 +72,55 @@ class Server:
 			bydn = "Расписание звонков в будни\n1 пара: 08:30-10:00\n2 пара: 10:10-11:40\n3 пара: 12:20-13:40\n4 пара: 13:50-15:10"
 			subb = "Расписание звонков в субботу\n1 пара: 08:30-09:40\n2 пара: 09:50-11:00\n3 пара: 11:10-12:20\n4 пара: 12:30-13:40"
 
-			#while event.object.text != "отмена":
-			'''game2 = random.randint(1, 3)
-			if game2 == 1:
-				pl1 = " &#128074;"
-			elif game2 == 2:
-				pl1 = " :v:"
-			else:
-				pl1 = " &#9995;"
-
-			if event.type == VkBotEventType.MESSAGE_NEW and event.object.text == "!кнб":
-				self.send_message(event.object.peer_id, "Выберите один из трех предметов. \n 1 - 👊 2 - ✌ 3 - ✋")
-				try:
-					if event.object.text == "1":
-						self.send_message(event.object.peer_id, "Вы выбрали &#128074;\n Бот выбрал" + str(pl1))
-						if game2 == 1:
-							self.send_message(event.object.peer_id, "Ничья")
-						elif game2 == 2:
-							self.send_message(event.object.peer_id, "Вы Победили")
-						else:
-							self.send_message(event.object.peer_id, "Вы проиграли")
-
-					elif event.object.text == "2":
-						self.send_message(event.object.peer_id, "Вы выбрали :v:\n Бот выбрал" + str(pl1))
-
-						if game2 == 1:
-							self.send_message(event.object.peer_id, "Вы проиграли")
-						elif game2 == 2:
-							self.send_message(event.object.peer_id, "Ничья")
-						else:
-							self.send_message(event.object.peer_id, "Вы Победили")
-
-					elif event.object.text == "3":
-						self.send_message(event.object.peer_id, "Вы выбрали &#9995;\n Бот выбрал" + str(pl1))
-						if game2 == 1:
-							self.send_message(event.object.peer_id, "Вы Победили")
-						elif game2 == 2:
-							self.send_message(event.object.peer_id, "Вы прроиграли")
-						else:
-							self.send_message(event.object.peer_id, "Ничья")
-
-					elif event.object.text == "отмена":
-						self.send_message(event.object.peer_id, "Выход из игры")
-
-					else:
-						self.send_message(event.object.peer_id, "Выберите предметы от 1 до 3")
-						pass
-						continue
-				except:
-					self.send_message(event.object.peer_id, "Выберите предметы от 1 до 3")'''
-
 
 			if event.type == VkBotEventType.MESSAGE_NEW and event.object.text == "!расп":
-
-				if day == 0:
-					if rtime <= times:
-						self.send_message(event.object.peer_id, bydn)
-						for tr in soup.find_all('tr', at_col = 't1'):
-							zan = tr.find('td', class_ = 'sch_ed')#Парсим занятие
-							kab = tr.find('td', class_ = 'sch_ed sch_room')#Парсим кабинеты
-							zan2 = tr.find('td', class_ = 'sch_all')#Парсим занятие, если их 2
-							kab2 = tr.find('td', class_ = 'sch_all sch_room')#Парсим кабинеты, если их 2
-
-							if zan == None:
-								self.send_message(event.object.peer_id, zan2.text + '\n' 'Кабинет: ' + kab2.text + '\n')
-							else:
-								self.send_message(event.object.peer_id, zan.text + '\n' 'Кабинет: ' + kab.text + '\n')
-					else:
-						self.send_message(event.object.peer_id, bydn)
-						for tr in soup.find_all('tr', at_col = 't2'):
-							zan = tr.find('td', class_ = 'sch_ed')#Парсим занятие
-							kab = tr.find('td', class_ = 'sch_ed sch_room')#Парсим кабинеты
-							zan2 = tr.find('td', class_ = 'sch_all')#Парсим занятие, если их 2
-							kab2 = tr.find('td', class_ = 'sch_all sch_room')#Парсим кабинеты, если их 2
-
-							if zan == None:
-								self.send_message(event.object.peer_id, zan2.text + '\n' 'Кабинет: ' + kab2.text + '\n')
-							else:
-								self.send_message(event.object.peer_id, zan.text + '\n' 'Кабинет: ' + kab.text + '\n')
-
-				elif day == 1:
-					if rtime <= times:
-						self.send_message(event.object.peer_id, bydn)
-						for tr in soup.find_all('tr', at_col = 't2'):
-							zan = tr.find('td', class_ = 'sch_ed')#Парсим занятие
-							kab = tr.find('td', class_ = 'sch_ed sch_room')#Парсим кабинеты
-							zan2 = tr.find('td', class_ = 'sch_all')#Парсим занятие, если их 2
-							kab2 = tr.find('td', class_ = 'sch_all sch_room')#Парсим кабинеты, если их 2
-
-							if zan == None:
-								self.send_message(event.object.peer_id, zan2.text + '\n' 'Кабинет: ' + kab2.text + '\n')
-							else:
-								self.send_message(event.object.peer_id, zan.text + '\n' 'Кабинет: ' + kab.text + '\n')
-					else:
-						self.send_message(event.object.peer_id, bydn)
-						for tr in soup.find_all('tr', at_col = 't3'):
-							zan = tr.find('td', class_ = 'sch_ed')#Парсим занятие
-							kab = tr.find('td', class_ = 'sch_ed sch_room')#Парсим кабинеты
-							zan2 = tr.find('td', class_ = 'sch_all')#Парсим занятие, если их 2
-							kab2 = tr.find('td', class_ = 'sch_all sch_room')#Парсим кабинеты, если их 2
-
-							if zan == None:
-								self.send_message(event.object.peer_id, zan2.text + '\n' 'Кабинет: ' + kab2.text + '\n')
-							else:
-								self.send_message(event.object.peer_id, zan.text + '\n' 'Кабинет: ' + kab.text + '\n')
-
-				elif day == 2:
-					if rtime <= times:
-						self.send_message(event.object.peer_id, bydn)
-						for tr in soup.find_all('tr', at_col = 't3'):
-							zan = tr.find('td', class_ = 'sch_ed')#Парсим занятие
-							kab = tr.find('td', class_ = 'sch_ed sch_room')#Парсим кабинеты
-							zan2 = tr.find('td', class_ = 'sch_all')#Парсим занятие, если их 2
-							kab2 = tr.find('td', class_ = 'sch_all sch_room')#Парсим кабинеты, если их 2
-
-							if zan == None:
-								self.send_message(event.object.peer_id, zan2.text + '\n' 'Кабинет: ' + kab2.text + '\n')
-							else:
-								self.send_message(event.object.peer_id, zan.text + '\n' 'Кабинет: ' + kab.text + '\n')
-					else:
-						self.send_message(event.object.peer_id, bydn)
-						for tr in soup.find_all('tr', at_col = 't4'):
-							zan = tr.find('td', class_ = 'sch_ed')#Парсим занятие
-							kab = tr.find('td', class_ = 'sch_ed sch_room')#Парсим кабинеты
-							zan2 = tr.find('td', class_ = 'sch_all')#Парсим занятие, если их 2
-							kab2 = tr.find('td', class_ = 'sch_all sch_room')#Парсим кабинеты, если их 2
-
-							if zan == None:
-								self.send_message(event.object.peer_id, zan2.text + '\n' 'Кабинет: ' + kab2.text + '\n')
-							else:
-								self.send_message(event.object.peer_id, zan.text + '\n' 'Кабинет: ' + kab.text + '\n')
-
-				elif day == 3:
-					if rtime <= times:
-						self.send_message(event.object.peer_id, bydn)
-						for tr in soup.find_all('tr', at_col = 't4'):
-							zan = tr.find('td', class_ = 'sch_ed')#Парсим занятие
-							kab = tr.find('td', class_ = 'sch_ed sch_room')#Парсим кабинеты
-							zan2 = tr.find('td', class_ = 'sch_all')#Парсим занятие, если их 2
-							kab2 = tr.find('td', class_ = 'sch_all sch_room')#Парсим кабинеты, если их 2
-
-							if zan == None:
-								self.send_message(event.object.peer_id, zan2.text + '\n' 'Кабинет: ' + kab2.text + '\n')
-							else:
-								self.send_message(event.object.peer_id, zan.text + '\n' 'Кабинет: ' + kab.text + '\n')
-					else:
-						self.send_message(event.object.peer_id, bydn)
-						for tr in soup.find_all('tr', at_col = 't5'):
-							zan = tr.find('td', class_ = 'sch_ed')#Парсим занятие
-							kab = tr.find('td', class_ = 'sch_ed sch_room')#Парсим кабинеты
-							zan2 = tr.find('td', class_ = 'sch_all')#Парсим занятие, если их 2
-							kab2 = tr.find('td', class_ = 'sch_all sch_room')#Парсим кабинеты, если их 2
-
-							if zan == None:
-								self.send_message(event.object.peer_id, zan2.text + '\n' 'Кабинет: ' + kab2.text + '\n')
-							else:
-								self.send_message(event.object.peer_id, zan.text + '\n' 'Кабинет: ' + kab.text + '\n')
-
-				elif day == 4:
-					if rtime <= times:
-						self.send_message(event.object.peer_id, bydn)
-						for tr in soup.find_all('tr', at_col = 't5'):
-							zan = tr.find('td', class_ = 'sch_ed')#Парсим занятие
-							kab = tr.find('td', class_ = 'sch_ed sch_room')#Парсим кабинеты
-							zan2 = tr.find('td', class_ = 'sch_all')#Парсим занятие, если их 2
-							kab2 = tr.find('td', class_ = 'sch_all sch_room')#Парсим кабинеты, если их 2
-
-							if zan == None:
-								self.send_message(event.object.peer_id, zan2.text + '\n' 'Кабинет: ' + kab2.text + '\n')
-							else:
-								self.send_message(event.object.peer_id, zan.text + '\n' 'Кабинет: ' + kab.text + '\n')
-					else:
+				if day <= 6 and rtime < times:
+					if day == 6:
 						self.send_message(event.object.peer_id, subb)
-						for tr in soup.find_all('tr', at_col = 't6'):
-							zan = tr.find('td', class_ = 'sch_ed')#Парсим занятие
-							kab = tr.find('td', class_ = 'sch_ed sch_room')#Парсим кабинеты
-							zan2 = tr.find('td', class_ = 'sch_all')#Парсим занятие, если их 2
-							kab2 = tr.find('td', class_ = 'sch_all sch_room')#Парсим кабинеты, если их 2
-
-							if zan == None:
-								self.send_message(event.object.peer_id, zan2.text + '\n' 'Кабинет: ' + kab2.text + '\n')
-							else:
-								self.send_message(event.object.peer_id, zan.text + '\n' 'Кабинет: ' + kab.text + '\n')
-
-				elif day == 5:
-					if rtime <= times:
-						self.send_message(event.object.peer_id, subb)
-						for tr in soup.find_all('tr', at_col = 't6'):
-							zan = tr.find('td', class_ = 'sch_ed')#Парсим занятие
-							kab = tr.find('td', class_ = 'sch_ed sch_room')#Парсим кабинеты
-							zan2 = tr.find('td', class_ = 'sch_all')#Парсим занятие, если их 2
-							kab2 = tr.find('td', class_ = 'sch_all sch_room')#Парсим кабинеты, если их 2
-
-							if zan == None:
-								self.send_message(event.object.peer_id, zan2.text + '\n' 'Кабинет: ' + kab2.text + '\n')
-							else:
-								self.send_message(event.object.peer_id, zan.text + '\n' 'Кабинет: ' + kab.text + '\n')
-
-				elif day == 6:
+					else:
 						self.send_message(event.object.peer_id, bydn)
-						for tr in soup.find_all('tr', at_col = 't1'):
-							zan = tr.find('td', class_ = 'sch_ed')#Парсим занятие
-							kab = tr.find('td', class_ = 'sch_ed sch_room')#Парсим кабинеты
-							zan2 = tr.find('td', class_ = 'sch_all')#Парсим занятие, если их 2
-							kab2 = tr.find('td', class_ = 'sch_all sch_room')#Парсим кабинеты, если их 2
+					for tr in soup.find_all('tr', at_col = 't1'):
+						zan = tr.find('td', class_ = 'sch_ed')#Парсим занятие
+						kab = tr.find('td', class_ = 'sch_ed sch_room')#Парсим кабинеты
+						zan2 = tr.find('td', class_ = 'sch_all')#Парсим занятие, если их 2
+						kab2 = tr.find('td', class_ = 'sch_all sch_room')#Парсим кабинеты, если их 2
 
-							if zan == None:
-								self.send_message(event.object.peer_id, zan2.text + '\n' 'Кабинет: ' + kab2.text + '\n')
-							else:
-								self.send_message(event.object.peer_id, zan.text + '\n' 'Кабинет: ' + kab.text + '\n')
+						if zan == None:
+							self.send_message(event.object.peer_id, zan2.text + '\n' 'Кабинет: ' + kab2.text + '\n')
+						else:
+							self.send_message(event.object.peer_id, zan.text + '\n' 'Кабинет: ' + kab.text + '\n')
+
+				elif day == 7:
+					self.send_message(event.object.peer_id, bydn)
+					for tr in soup.find_all('tr', at_col = 't1'):
+						zan = tr.find('td', class_ = 'sch_ed')#Парсим занятие
+						kab = tr.find('td', class_ = 'sch_ed sch_room')#Парсим кабинеты
+						zan2 = tr.find('td', class_ = 'sch_all')#Парсим занятие, если их 2
+						kab2 = tr.find('td', class_ = 'sch_all sch_room')#Парсим кабинеты, если их 2
+
+						if zan == None:
+							self.send_message(event.object.peer_id, zan2.text + '\n' 'Кабинет: ' + kab2.text + '\n')
+						else:
+							self.send_message(event.object.peer_id, zan.text + '\n' 'Кабинет: ' + kab.text + '\n')
+
+				else:
+					if day == 5 and rtime > times:
+						self.send_message(event.object.peer_id, subb)
+					else:
+						self.send_message(event.object.peer_id, bydn)
+					for tr in soup.find_all('tr', at_col = 't' + str(day + 1)):
+						zan = tr.find('td', class_ = 'sch_ed')#Парсим занятие
+						kab = tr.find('td', class_ = 'sch_ed sch_room')#Парсим кабинеты
+						zan2 = tr.find('td', class_ = 'sch_all')#Парсим занятие, если их 2
+						kab2 = tr.find('td', class_ = 'sch_all sch_room')#Парсим кабинеты, если их 2
+
+						if zan == None:
+							self.send_message(event.object.peer_id, zan2.text + '\n' 'Кабинет: ' + kab2.text + '\n')
+						else:
+							self.send_message(event.object.peer_id, zan.text + '\n' 'Кабинет: ' + kab.text + '\n')
+					
 
 
-								'''ТУПА ИЗИ, ТУПА СПЛЕШ, ТУПА ЕБЛАН НА ВАЛЕРЕ УЧИСЬ ДЕЛАТЬ МЕНЬШЕ КОДА
-									НАДО КАК-ТО ЭТО ЕБАТЬ УЖАТЬ ПИЗДЕЦ КАК, ЧТОБ ОНО НЕ ЗАНИМАЛО МИЛЛИОН СТРОК СУКА ТУПАЯ'''
 								
 
 			elif event.type == VkBotEventType.MESSAGE_NEW and event.object.text == "!расп понедельник":
@@ -381,13 +215,6 @@ class Server:
 					self.send_message(event.object.peer_id, username +  ', ' + "тест на IQ пройден. Ваш результат: " + str(iq) + "\n" + random.choice(iqninty))
 				elif iq >= 111:
 					self.send_message(event.object.peer_id, username +  ', ' + "тест на IQ пройден. Ваш результат: " + str(iq) + "\n" + random.choice(iqsuper))
-
-			elif event.type == VkBotEventType.MESSAGE_NEW and event.object.text == "!монетка":
-				coin = random.randint(0, 1)
-				if coin == 0:
-					self.send_message(event.object.peer_id, "Выпал орел")
-				else:
-					self.send_message(event.object.peer_id, "Выпала решка")
 
 	def send_message(self, peer_id, message):
 		self.vk_api.messages.send(peer_id=peer_id, random_id=0, message=message)
