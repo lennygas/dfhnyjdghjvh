@@ -124,6 +124,7 @@ class Server:
 								
 
 			elif event.type == VkBotEventType.MESSAGE_NEW and event.object.text == "!расп понедельник":
+				self.send_message(event.object.peer_id, bydn)
 				for tr in soup.find_all('tr', at_col = 't1'):
 					zan = tr.find('td', class_ = 'sch_ed')#Парсим занятие
 					kab = tr.find('td', class_ = 'sch_ed sch_room')#Парсим кабинеты
@@ -136,6 +137,7 @@ class Server:
 						self.send_message(event.object.peer_id, zan.text + '\n' 'Кабинет: ' + kab.text + '\n')
 
 			elif event.type == VkBotEventType.MESSAGE_NEW and event.object.text == "!расп вторник":
+				self.send_message(event.object.peer_id, bydn)
 				for tr in soup.find_all('tr', at_col = 't2'):
 					zan = tr.find('td', class_ = 'sch_ed')#Парсим занятие
 					kab = tr.find('td', class_ = 'sch_ed sch_room')#Парсим кабинеты
@@ -148,6 +150,7 @@ class Server:
 						self.send_message(event.object.peer_id, zan.text + '\n' 'Кабинет: ' + kab.text + '\n')
 
 			elif event.type == VkBotEventType.MESSAGE_NEW and event.object.text == "!расп среда":
+				self.send_message(event.object.peer_id, bydn)
 				for tr in soup.find_all('tr', at_col = 't3'):
 					zan = tr.find('td', class_ = 'sch_ed')#Парсим занятие
 					kab = tr.find('td', class_ = 'sch_ed sch_room')#Парсим кабинеты
@@ -160,6 +163,7 @@ class Server:
 						self.send_message(event.object.peer_id, zan.text + '\n' 'Кабинет: ' + kab.text + '\n')
 
 			elif event.type == VkBotEventType.MESSAGE_NEW and event.object.text == "!расп четверг":
+				self.send_message(event.object.peer_id, bydn)
 				for tr in soup.find_all('tr', at_col = 't4'):
 					zan = tr.find('td', class_ = 'sch_ed')#Парсим занятие
 					kab = tr.find('td', class_ = 'sch_ed sch_room')#Парсим кабинеты
@@ -172,6 +176,7 @@ class Server:
 						self.send_message(event.object.peer_id, zan.text + '\n' 'Кабинет: ' + kab.text + '\n')
 
 			elif event.type == VkBotEventType.MESSAGE_NEW and event.object.text == "!расп пятница":
+				self.send_message(event.object.peer_id, bydn)
 				for tr in soup.find_all('tr', at_col = 't5'):
 					zan = tr.find('td', class_ = 'sch_ed')#Парсим занятие
 					kab = tr.find('td', class_ = 'sch_ed sch_room')#Парсим кабинеты
@@ -184,6 +189,7 @@ class Server:
 						self.send_message(event.object.peer_id, zan.text + '\n' 'Кабинет: ' + kab.text + '\n')
 
 			elif event.type == VkBotEventType.MESSAGE_NEW and event.object.text == "!расп суббота":
+				self.send_message(event.object.peer_id, subb)
 				for tr in soup.find_all('tr', at_col = 't6'):
 					zan = tr.find('td', class_ = 'sch_ed')#Парсим занятие
 					kab = tr.find('td', class_ = 'sch_ed sch_room')#Парсим кабинеты
@@ -196,6 +202,7 @@ class Server:
 						self.send_message(event.object.peer_id, zan.text + '\n' 'Кабинет: ' + kab.text + '\n')
 
 			elif event.type == VkBotEventType.MESSAGE_NEW and event.object.text == "!расп воскресенье":
+				self.send_message(event.object.peer_id, bydn)
 				username = self.get_user_name(event.object.from_id)
 				self.send_message(event.object.peer_id, username +  ', ' + random.choice(que))
 
