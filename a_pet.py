@@ -79,7 +79,7 @@ class Server:
 						self.send_message(event.object.peer_id, subb)
 					else:
 						self.send_message(event.object.peer_id, bydn)
-					for tr in soup.find_all('tr', at_col = 't1'):
+					for tr in soup.find_all('tr', at_col = 't' + str(day)):
 						zan = tr.find('td', class_ = 'sch_ed')#Парсим занятие
 						kab = tr.find('td', class_ = 'sch_ed sch_room')#Парсим кабинеты
 						zan2 = tr.find('td', class_ = 'sch_all')#Парсим занятие, если их 2
