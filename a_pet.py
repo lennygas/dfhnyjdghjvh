@@ -74,7 +74,7 @@ class Server:
 			stog = ["Стогова", "стогова", "стогову", "Стогову"]
 
 
-			if event.type == VkBotEventType.MESSAGE_NEW and stog in event.object.text:
+			if event.type == VkBotEventType.MESSAGE_NEW and str(stog) in event.object.text:
 				self.send_message(event.object.peer_id, 'Обнаружена Стогова, блятб, иди нахуй')
 
 			elif event.type == VkBotEventType.MESSAGE_NEW and event.object.text == "!расп":
