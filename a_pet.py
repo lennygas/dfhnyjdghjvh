@@ -71,10 +71,9 @@ class Server:
 
 			bydn = "Расписание звонков в будни\n1 пара: 08:30-10:00\n2 пара: 10:10-11:40\n3 пара: 12:20-13:40\n4 пара: 13:50-15:10"
 			subb = "Расписание звонков в субботу\n1 пара: 08:30-09:40\n2 пара: 09:50-11:00\n3 пара: 11:10-12:20\n4 пара: 12:30-13:40"
-			stog = ["Стогова", "стогова", "стогову", "Стогову"]
 
 
-			if event.type == VkBotEventType.MESSAGE_NEW and str(stog) in event.object.text:
+			if event.type == VkBotEventType.MESSAGE_NEW and 'стогова' in event.object.text:
 				self.send_message(event.object.peer_id, 'Обнаружена Стогова, блятб, иди нахуй')
 
 			elif event.type == VkBotEventType.MESSAGE_NEW and event.object.text == "!расп":
