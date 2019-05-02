@@ -73,6 +73,9 @@ class Server:
 			subb = "Расписание звонков в субботу\n1 пара: 08:30-09:40\n2 пара: 09:50-11:00\n3 пара: 11:10-12:20\n4 пара: 12:30-13:40"
 
 
+			if event.type == VkBotEventType.MESSAGE_NEW and in event.object.text == "стогова":
+				self.send_message(event.object.peer_id, 'Обнаружена Стогова, блятб, иди нахуй')
+
 			if event.type == VkBotEventType.MESSAGE_NEW and event.object.text == "!расп":
 				if day <= 6 and rtime < times:
 					if day == 6:
