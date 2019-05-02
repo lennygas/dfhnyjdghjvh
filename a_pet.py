@@ -76,7 +76,7 @@ class Server:
 			if event.type == VkBotEventType.MESSAGE_NEW and in event.object.text == "стогова":
 				self.send_message(event.object.peer_id, 'Обнаружена Стогова, блятб, иди нахуй')
 
-			if event.type == VkBotEventType.MESSAGE_NEW and event.object.text == "!расп":
+			elif event.type == VkBotEventType.MESSAGE_NEW and event.object.text == "!расп":
 				if day <= 6 and rtime < times:
 					if day == 6:
 						self.send_message(event.object.peer_id, subb)
