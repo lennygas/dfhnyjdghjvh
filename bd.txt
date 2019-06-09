@@ -1,1 +1,1 @@
-["http://a-pet.ru/schedule/?group=%CF%CA%D1-7&even=1"]
+["http://a-pet.ru/schedule/?group=%CF%CA%D1-7&even=0"]
