@@ -73,10 +73,10 @@ class Server:
 			subb = "Расписание звонков в субботу\n1 пара: 08:30-09:40\n2 пара: 09:50-11:00\n3 пара: 11:10-12:20\n4 пара: 12:30-13:40"
 
 
-			if event.type == VkBotEventType.MESSAGE_NEW and 'стогова' in event.object.text:
+			if event.type == VkBotEventType.MESSAGE_NEW and (event.object.text).lower() == "стогова":
 				self.send_message(event.object.peer_id, 'Обнаружена Стогова, блятб, иди нахуй')
 
-			elif event.type == VkBotEventType.MESSAGE_NEW and event.object.text == "!расп":
+			elif event.type == VkBotEventType.MESSAGE_NEW and (event.object.text).lower() == "!расп":
 				if day <= 6 and rtime < times:
 					if day == 6:
 						self.send_message(event.object.peer_id, subb)
@@ -126,7 +126,7 @@ class Server:
 
 								
 
-			elif event.type == VkBotEventType.MESSAGE_NEW and event.object.text == "!расп понедельник":
+			elif event.type == VkBotEventType.MESSAGE_NEW and (event.object.text).lower() == "!расп понедельник":
 				self.send_message(event.object.peer_id, bydn)
 				for tr in soup.find_all('tr', at_col = 't1'):
 					zan = tr.find('td', class_ = 'sch_ed')#Парсим занятие
@@ -139,7 +139,7 @@ class Server:
 					else:
 						self.send_message(event.object.peer_id, zan.text + '\n' 'Кабинет: ' + kab.text + '\n')
 
-			elif event.type == VkBotEventType.MESSAGE_NEW and event.object.text == "!расп вторник":
+			elif event.type == VkBotEventType.MESSAGE_NEW and (event.object.text).lower() == "!расп вторник":
 				self.send_message(event.object.peer_id, bydn)
 				for tr in soup.find_all('tr', at_col = 't2'):
 					zan = tr.find('td', class_ = 'sch_ed')#Парсим занятие
@@ -152,7 +152,7 @@ class Server:
 					else:
 						self.send_message(event.object.peer_id, zan.text + '\n' 'Кабинет: ' + kab.text + '\n')
 
-			elif event.type == VkBotEventType.MESSAGE_NEW and event.object.text == "!расп среда":
+			elif event.type == VkBotEventType.MESSAGE_NEW and (event.object.text).lower() == "!расп среда":
 				self.send_message(event.object.peer_id, bydn)
 				for tr in soup.find_all('tr', at_col = 't3'):
 					zan = tr.find('td', class_ = 'sch_ed')#Парсим занятие
@@ -165,7 +165,7 @@ class Server:
 					else:
 						self.send_message(event.object.peer_id, zan.text + '\n' 'Кабинет: ' + kab.text + '\n')
 
-			elif event.type == VkBotEventType.MESSAGE_NEW and event.object.text == "!расп четверг":
+			elif event.type == VkBotEventType.MESSAGE_NEW and (event.object.text).lower() == "!расп четверг":
 				self.send_message(event.object.peer_id, bydn)
 				for tr in soup.find_all('tr', at_col = 't4'):
 					zan = tr.find('td', class_ = 'sch_ed')#Парсим занятие
@@ -178,7 +178,7 @@ class Server:
 					else:
 						self.send_message(event.object.peer_id, zan.text + '\n' 'Кабинет: ' + kab.text + '\n')
 
-			elif event.type == VkBotEventType.MESSAGE_NEW and event.object.text == "!расп пятница":
+			elif event.type == VkBotEventType.MESSAGE_NEW and (event.object.text).lower() == "!расп пятница":
 				self.send_message(event.object.peer_id, bydn)
 				for tr in soup.find_all('tr', at_col = 't5'):
 					zan = tr.find('td', class_ = 'sch_ed')#Парсим занятие
@@ -191,7 +191,7 @@ class Server:
 					else:
 						self.send_message(event.object.peer_id, zan.text + '\n' 'Кабинет: ' + kab.text + '\n')
 
-			elif event.type == VkBotEventType.MESSAGE_NEW and event.object.text == "!расп суббота":
+			elif event.type == VkBotEventType.MESSAGE_NEW and (event.object.text).lower() == "!расп суббота":
 				self.send_message(event.object.peer_id, subb)
 				for tr in soup.find_all('tr', at_col = 't6'):
 					zan = tr.find('td', class_ = 'sch_ed')#Парсим занятие
@@ -204,12 +204,12 @@ class Server:
 					else:
 						self.send_message(event.object.peer_id, zan.text + '\n' 'Кабинет: ' + kab.text + '\n')
 
-			elif event.type == VkBotEventType.MESSAGE_NEW and event.object.text == "!расп воскресенье":
+			elif event.type == VkBotEventType.MESSAGE_NEW and (event.object.text).lower() == "!расп воскресенье":
 				self.send_message(event.object.peer_id, bydn)
 				username = self.get_user_name(event.object.from_id)
 				self.send_message(event.object.peer_id, username +  ', ' + random.choice(que))
 
-			elif event.type == VkBotEventType.MESSAGE_NEW and event.object.text == "!iq" or event.object.text == "!айку":
+			elif event.type == VkBotEventType.MESSAGE_NEW and (event.object.text).lower() == "!iq" or (event.object.text).lower() == "!айку":
 				username = self.get_user_name(event.object.from_id)
 				podkr = ['Ну это просто бог какой-то', 'Произошла подкрутка', 'Пиздец, мой создатель дебил и крутит очки айку для своей герлфренд и себя']
 
