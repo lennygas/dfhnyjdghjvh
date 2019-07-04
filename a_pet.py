@@ -165,7 +165,7 @@ class Server:
 					self.send_message(event.object.peer_id, username +  ', ' + "Выпала решка.\nПоздравляю, Вы все равно отчислены!")
 
 			elif event.type == VkBotEventType.MESSAGE_NEW and event.object.text == "test":
-				self.vk_api.messages.getChat()
+				self.vk_api.messages.getChat(id=-157431227)
 
 	def send_message(self, peer_id, message):
 		self.vk_api.messages.send(peer_id=peer_id, random_id=0, message=message)
