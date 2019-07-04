@@ -75,7 +75,7 @@ class Server:
 			daus = {'!расп понедельник': 1, '!расп вторник': 2, '!расп среда': 3, '!расп четверг': 4, '!расп пятница': 5, '!расп суббота': 6}
 
 
-			if event.type == VkBotEventType.MESSAGE_NEW and (event.object.text).lower() == "стогова":
+			if event.type == VkBotEventType.MESSAGE_NEW and (event.object.text).lower() == "стогова" + event.object.text:
 				self.send_message(event.object.peer_id, 'Обнаружена Стогова, блятб, иди нахуй')
 
 			elif event.type == VkBotEventType.MESSAGE_NEW and (event.object.text).lower() == "!расп":
@@ -155,6 +155,14 @@ class Server:
 					self.send_message(event.object.peer_id, username +  ', ' + "тест на IQ пройден. Ваш результат: " + str(iq) + "\n" + random.choice(iqninty))
 				elif iq >= 111:
 					self.send_message(event.object.peer_id, username +  ', ' + "тест на IQ пройден. Ваш результат: " + str(iq) + "\n" + random.choice(iqsuper))
+
+			elif event.type == VkBotEventType.MESSAGE_NEW and (event.object.text).lower() == "!монетка" or (event.object.text).lower() == "!монета":
+				username = self.get_user_name(event.object.from_id)
+				aa = random.randint(1, 2)
+				if aa == 1:
+					self.send_message(event.object.peer_id, username +  ', ' + "Выпал орел.\nПоздравляю, Вы отчислены!")
+				else:
+					self.send_message(event.object.peer_id, username +  ', ' + "Выпала решка.\nПоздравляю, Вы все равно отчислены!")
 
 	def send_message(self, peer_id, message):
 		self.vk_api.messages.send(peer_id=peer_id, random_id=0, message=message)
