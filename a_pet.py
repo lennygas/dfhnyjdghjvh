@@ -160,12 +160,12 @@ class Server:
 				username = self.get_user_name(event.object.from_id)
 				aa = random.randint(1, 2)
 				if aa == 1:
-					self.send_message(event.object.peer_id, username +  ', ' + "Выпал орел.\nПоздравляю, Вы отчислены!", event.object.conversation_message_id)
+					self.send_message(event.object.peer_id, event.object.conversation_message_id, username +  ', ' + "Выпал орел.\nПоздравляю, Вы отчислены!")
 				else:
-					self.send_message(event.object.peer_id, username +  ', ' + "Выпала решка.\nПоздравляю, Вы все равно отчислены!", event.object.conversation_message_id)
+					self.send_message(event.object.peer_id, event.object.conversation_message_id, username +  ', ' + "Выпала решка.\nПоздравляю, Вы все равно отчислены!")
 
 	def send_message(self, peer_id, message):
-		self.vk_api.messages.send(peer_id=peer_id, random_id=0, message=message, reply_to=reply_to)
+		self.vk_api.messages.send(peer_id=peer_id, random_id=0, reply_to=reply_to, message=message)
 
 	def get_user_name(self, user_id):
 		return self.vk_api.users.get(user_id=user_id)[0]['first_name']
