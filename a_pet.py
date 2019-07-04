@@ -156,7 +156,7 @@ class Server:
 				elif iq >= 111:
 					self.send_message(event.object.peer_id, username +  ', ' + "тест на IQ пройден. Ваш результат: " + str(iq) + "\n" + random.choice(iqsuper))
 
-			elif event.type == VkBotEventType.MESSAGE_NEW and (event.object.text).lower() == "монетка" or event.object.fwd_messages[0].text == "монетка":
+			elif event.type == VkBotEventType.MESSAGE_NEW and (event.object.text).lower() == "монетка":
 				username = self.get_user_name(event.object.from_id)
 				aa = random.randint(1, 2)
 				if aa == 1:
