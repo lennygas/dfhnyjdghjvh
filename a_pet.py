@@ -156,16 +156,13 @@ class Server:
 				elif iq >= 111:
 					self.send_message(event.object.peer_id, username +  ', ' + "тест на IQ пройден. Ваш результат: " + str(iq) + "\n" + random.choice(iqsuper))
 
-			elif event.type == VkBotEventType.MESSAGE_NEW and (event.object.text).lower() == "монетка":
+			elif event.type == VkBotEventType.MESSAGE_NEW and (event.object.text).lower() == "монетка" or event.object.fwd_messages[0].text == "монетка":
 				username = self.get_user_name(event.object.from_id)
 				aa = random.randint(1, 2)
 				if aa == 1:
 					self.send_message(event.object.peer_id, username +  ', ' + "Выпал орел.\nПоздравляю, Вы отчислены!")
 				else:
 					self.send_message(event.object.peer_id, username +  ', ' + "Выпала решка.\nПоздравляю, Вы все равно отчислены!")
-
-			elif event.type == VkBotEventType.MESSAGE_NEW and event.object.text == "test":
-				self.vk_api.messages.getChat(id=-157431227)
 
 	def send_message(self, peer_id, message):
 		self.vk_api.messages.send(peer_id=peer_id, random_id=0, message=message)
