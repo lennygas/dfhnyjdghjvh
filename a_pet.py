@@ -75,7 +75,7 @@ class Server:
 			daus = {'!расп понедельник': 1, '!расп вторник': 2, '!расп среда': 3, '!расп четверг': 4, '!расп пятница': 5, '!расп суббота': 6}
 
 
-			if event.type == VkBotEventType.MESSAGE_NEW and (event.object.text).lower() == "стогова" + event.object.text:
+			if event.type == VkBotEventType.MESSAGE_NEW and (event.object.text).lower() == "стогова":
 				self.send_message(event.object.peer_id, 'Обнаружена Стогова, блятб, иди нахуй')
 
 			elif event.type == VkBotEventType.MESSAGE_NEW and (event.object.text).lower() == "!расп":
