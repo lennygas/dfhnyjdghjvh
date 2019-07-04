@@ -165,7 +165,7 @@ class Server:
 					self.send_message(event.object.peer_id, username +  ', ' + "Выпала решка.\nПоздравляю, Вы все равно отчислены!")
 
 	def send_message(self, peer_id, message):
-		self.vk_api.messages.send(peer_id=peer_id, random_id=0, message=message)
+		self.vk_api.messages.send(peer_id=peer_id, random_id=0, message=message, reply_to=event.object.conversation_message_id)
 
 	def get_user_name(self, user_id):
 		return self.vk_api.users.get(user_id=user_id)[0]['first_name']
