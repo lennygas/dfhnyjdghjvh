@@ -64,6 +64,8 @@ class Server:
 			rtime = datetime.datetime.today().time()
 			times = datetime.time(7)
 
+			print (event.object)
+
 			que = ['может сразу на завод пойдешь?', 'у меня нет слов, одни междометия', 'пожалуй, я промолчу', 'ну тут только в окно']
 			iqseventyn = ['Не удивительно, что ты учишься в АПЭТ', 'Ну, бывает и хуже', 'Хотя бы не в минус', 'Странно, что ты вообще можешь связать речь..', 'IQ не зубы, еще вырастет']
 			iqninty = ['Удивлен, что ты до сих пор учишься тут', 'Рад, что ты лучше некоторых', 'Даже у меня меньше', 'Для завода достаточно']
@@ -160,12 +162,12 @@ class Server:
 				username = self.get_user_name(event.object.from_id)
 				aa = random.randint(1, 2)
 				if aa == 1:
-					self.send_message(event.object.peer_id, event.object.conversation_message_id, username +  ', ' + "Выпал орел.\nПоздравляю, Вы отчислены!")
+					self.send_message(event.object.peer_id, username +  ', ' + "Выпал орел.\nПоздравляю, Вы отчислены!")
 				else:
-					self.send_message(event.object.peer_id, event.object.conversation_message_id, username +  ', ' + "Выпала решка.\nПоздравляю, Вы все равно отчислены!")
+					self.send_message(event.object.peer_id, username +  ', ' + "Выпала решка.\nПоздравляю, Вы все равно отчислены!")
 
 	def send_message(self, peer_id, message):
-		self.vk_api.messages.send(peer_id=peer_id, random_id=0, reply_to=reply_to, message=message)
+		self.vk_api.messages.send(peer_id=peer_id, random_id=0,  message=message)
 
 	def get_user_name(self, user_id):
 		return self.vk_api.users.get(user_id=user_id)[0]['first_name']
