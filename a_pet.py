@@ -43,6 +43,10 @@ class Server:
 	def start(self):
 		for event in self.long_poll.listen():
 
+			schedule_up = 'http://a-pet.ru/schedule/?group=%CF%CA%D1-7&even=0'
+			schedule_down = 'http://a-pet.ru/schedule/?group=%CF%CA%D1-7&even=1'
+			schedule = {'!в' : 0, '!н' : 1}
+
 			filename = "bd.txt"
 			day = datetime.datetime.today().isoweekday()
 			a3 = datetime.datetime.today().date()
@@ -50,21 +54,44 @@ class Server:
 				a1 = []
 				ofile = open(filename, 'r+')
 				if a3.day % 2 == 0:
-					a1.append('http://a-pet.ru/schedule/?group=%CF%CA%D1-7&even=1')
+					a1.append(schedule_up)
 				elif a3.day % 2 != 0:
-					a1.append('http://a-pet.ru/schedule/?group=%CF%CA%D1-7&even=0')
+					a1.append(schedule_down)
 				json.dump(a1, ofile)
 				ofile.close()
+
+			elif event.type == VkBotEventType.MESSAGE_NEW and event.object.text in schedule:
+				a1 = []
+				ofile = open(filename, 'r+')
+				a1.append('http://a-pet.ru/schedule/?group=%CF%CA%D1-7&even=' + str(schedule[event.object.text]))
+				json.dump(a1, ofile)
+				ofile.close()
+				alert_schedule = ""
+				if schedule[event.object.text] == 0:
+					alert_schedule = "верхнее"
+				else:
+					alert_schedule = "нижнее"
+
+				self.send_message(event.object.peer_id, "Расписание изменено на " + alert_schedule)
+
 			ofile = open(filename, 'r')
 			json_data = json.load(ofile)
 			html = requests.get(json_data[0]).text
 			soup = BeautifulSoup(html, 'lxml')
 			ofile.close()
 
+			status = ""
+			if json_data[0] == 'http://a-pet.ru/schedule/?group=%CF%CA%D1-7&even=0':
+				status = "верхнее"
+			else:
+				status = "нижнее"
+
+			if event.type == VkBotEventType.MESSAGE_NEW and (event.object.text).lower() == "!статус":
+				self.send_message(event.object.peer_id, "Сейчас установлено " + str(status) + " расписание")
+
 			rtime = datetime.datetime.today().time()
 			times = datetime.time(7)
 
-			print (event.object)
 
 			que = ['может сразу на завод пойдешь?', 'у меня нет слов, одни междометия', 'пожалуй, я промолчу', 'ну тут только в окно']
 			iqseventyn = ['Не удивительно, что ты учишься в АПЭТ', 'Ну, бывает и хуже', 'Хотя бы не в минус', 'Странно, что ты вообще можешь связать речь..', 'IQ не зубы, еще вырастет']
@@ -76,9 +103,6 @@ class Server:
 
 			daus = {'!расп понедельник': 1, '!расп вторник': 2, '!расп среда': 3, '!расп четверг': 4, '!расп пятница': 5, '!расп суббота': 6}
 
-
-			if event.type == VkBotEventType.MESSAGE_NEW and (event.object.text).lower() == "стогова":
-				self.send_message(event.object.peer_id, 'Обнаружена Стогова, блятб, иди нахуй')
 
 			elif event.type == VkBotEventType.MESSAGE_NEW and (event.object.text).lower() == "!расп":
 				if day <= 6 and rtime < times:
@@ -127,7 +151,7 @@ class Server:
 							self.send_message(event.object.peer_id, zan.text + '\n' 'Кабинет: ' + kab.text + '\n')
 					
 
-			elif event.type == VkBotEventType.MESSAGE_NEW and (event.object.text).lower() in daus:
+			elif event.type == VkBotEventType.MESSAGE_NEW and event.object.text in daus:
 				self.send_message(event.object.peer_id, bydn)
 				for tr in soup.find_all('tr', at_col = 't' + str(daus[event.object.text])):
 					zan = tr.find('td', class_ = 'sch_ed')#Парсим занятие
