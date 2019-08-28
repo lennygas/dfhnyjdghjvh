@@ -104,7 +104,7 @@ class Server:
 			daus = {'!расп понедельник': 1, '!расп вторник': 2, '!расп среда': 3, '!расп четверг': 4, '!расп пятница': 5, '!расп суббота': 6}
 
 
-			elif event.type == VkBotEventType.MESSAGE_NEW and (event.object.text).lower() == "!расп":
+			if event.type == VkBotEventType.MESSAGE_NEW and (event.object.text).lower() == "!расп":
 				if day <= 6 and rtime < times:
 					if day == 6:
 						self.send_message(event.object.peer_id, subb)
