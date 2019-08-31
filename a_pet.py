@@ -43,8 +43,8 @@ class Server:
 	def start(self):
 		for event in self.long_poll.listen():
 
-			schedule_up = 'http://a-pet.ru/schedule/?group=%CF%CA%D1-7&even=0'
-			schedule_down = 'http://a-pet.ru/schedule/?group=%CF%CA%D1-7&even=1'
+			schedule_up = 'http://a-pet.ru/schedule/?group=%CF%CA%D1-7&even=1'
+			schedule_down = 'http://a-pet.ru/schedule/?group=%CF%CA%D1-7&even=0'
 			schedule = {'!в' : 0, '!н' : 1}
 
 			filename = "bd.txt"
