@@ -43,8 +43,8 @@ class Server:
 	def start(self):
 		for event in self.long_poll.listen():
 
-			schedule_up = 'http://a-pet.ru/schedule/?group=%CF%CA%D1-7&even=1'
-			schedule_down = 'http://a-pet.ru/schedule/?group=%CF%CA%D1-7&even=0'
+			schedule_up = 'http://a-pet.ru/schedule/?group=%CF%CA%D1-7&even=0'
+			schedule_down = 'http://a-pet.ru/schedule/?group=%CF%CA%D1-7&even=1'
 			schedule = {'!в' : 0, '!н' : 1}
 
 			filename = "bd.txt"
@@ -54,9 +54,9 @@ class Server:
 				a1 = []
 				ofile = open(filename, 'r+')
 				if a3.day % 2 == 0:
-					a1.append(schedule_up)
-				elif a3.day % 2 != 0:
 					a1.append(schedule_down)
+				elif a3.day % 2 != 0:
+					a1.append(schedule_up)
 				json.dump(a1, ofile)
 				ofile.close()
 
