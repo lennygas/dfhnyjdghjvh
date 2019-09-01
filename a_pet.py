@@ -50,7 +50,7 @@ class Server:
 			filename = "bd.txt"
 			day = datetime.datetime.today().isoweekday()
 			a3 = datetime.datetime.today().date()
-			if day == 7:
+			if day == 7 and rtime <= 1:
 				a1 = []
 				ofile = open(filename, 'r+')
 				if a3.day % 2 == 0:
@@ -72,7 +72,7 @@ class Server:
 				else:
 					alert_schedule = "нижнее"
 
-				self.send_message(event.object.peer_id, "Расписание изменено нf " + alert_schedule)
+				self.send_message(event.object.peer_id, "Расписание изменено на " + alert_schedule)
 
 			ofile = open(filename, 'r')
 			json_data = json.load(ofile)
