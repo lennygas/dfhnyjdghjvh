@@ -72,7 +72,7 @@ class Server:
 				else:
 					alert_schedule = "нижнее"
 
-				self.send_message(event.object.peer_id, "Расписание изменено на " + alert_schedule)
+				self.send_message(event.object.peer_id, "Расписание изменено нf " + alert_schedule)
 
 			ofile = open(filename, 'r')
 			json_data = json.load(ofile)
