@@ -50,7 +50,7 @@ class Server:
 			filename = "bd.txt"
 			day = datetime.datetime.today().isoweekday()
 			a3 = datetime.datetime.today().date()
-			if day == 7 and rtime <= 1:
+			if day == 7:
 				a1 = []
 				ofile = open(filename, 'r+')
 				if a3.day % 2 == 0:
