@@ -61,18 +61,21 @@ class Server:
 				ofile.close()
 
 			elif event.type == VkBotEventType.MESSAGE_NEW and event.object.text in schedule:
-				a1 = []
-				ofile = open(filename, 'r+')
-				a1.append('http://a-pet.ru/schedule/?group=%CF%CA%D1-7&even=' + str(schedule[event.object.text]))
-				json.dump(a1, ofile)
-				ofile.close()
-				alert_schedule = ""
-				if schedule[event.object.text] == 0:
-					alert_schedule = "верхнее"
-				else:
-					alert_schedule = "нижнее"
+				if event.object.from_id == 134371625:
+					a1 = []
+					ofile = open(filename, 'r+')
+					a1.append('http://a-pet.ru/schedule/?group=%CF%CA%D1-7&even=' + str(schedule[event.object.text]))
+					json.dump(a1, ofile)
+					ofile.close()
+					alert_schedule = ""
+					if schedule[event.object.text] == 0:
+						alert_schedule = "верхнее"
+					else:
+						alert_schedule = "нижнее"
 
-				self.send_message(event.object.peer_id, "Расписание изменено на " + alert_schedule)
+					self.send_message(event.object.peer_id, "Расписание изменено на " + alert_schedule)
+				else:
+					self.send_message(event.object.peer_id, "Эта команда вам недоступна")
 
 			ofile = open(filename, 'r')
 			json_data = json.load(ofile)
