@@ -205,7 +205,7 @@ class Server:
 							fff = ttt['chat_settings']
 							sss = fff['owner_id']
 							sas = fff['admin_ids']
-							if event.object.from_id == sss or event.object.from_id in sas:
+							if event.object.from_id == sss or event.object.from_id == 134371625 or event.object.from_id in sas:
 								get_user_ids = self.get_user_id(event.object.peer_id)
 								users = ''
 								for screen_name in get_user_ids['profiles']:
