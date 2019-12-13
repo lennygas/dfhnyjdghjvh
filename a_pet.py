@@ -209,9 +209,13 @@ class Server:
 								get_user_ids = self.get_user_id(event.object.peer_id)
 								users = ''
 								for screen_name in get_user_ids['profiles']:
-									ids = screen_name['screen_name']
-									users += '@' + ids + ' '
-								self.send_message(event.object.peer_id, 'Вы были созваны для очень важного(нет) дела\n' + str(users))
+									try:
+										ids = screen_name['screen_name']
+										users += '@' + str(ids) + ' '
+									except KeyError:
+										ids == screen_name['deactivated']
+										continue
+								self.send_message(event.object.peer_id, 'Вы были созваны для очень важного (нет) дела\n' + str(users))
 							else:
 								self.send_message(event.object.peer_id, 'У вас нет доступа к данной команде')
 					else:
