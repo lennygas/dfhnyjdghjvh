@@ -142,7 +142,7 @@ class Server:
 							else:
 								text_schedule += zan.text + '\nКабинет: ' + kab.text + '\nПреподаватель: ' + prep.text +  '\n\n'
 
-							self.send_message(event.object.peer_id, bydn + '\n\n' + text_schedule)
+						self.send_message(event.object.peer_id, bydn + '\n\n' + text_schedule)
 
 					else:
 						for tr in soup.find_all('tr', at_col = 't' + str(day + 1)):
