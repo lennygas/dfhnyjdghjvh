@@ -6,6 +6,7 @@ import datetime
 import json
 import random
 import time
+import command_enum
 
 class Server:
 
@@ -64,7 +65,7 @@ class Server:
 					ofile.close()
 
 				elif event.type == VkBotEventType.MESSAGE_NEW and event.object.text in schedule:
-					if event.object.from_id in admins:
+					if event.object.from_id == 134371625:
 						ofile = open(filename, 'r+')
 						a1.append('http://a-pet.ru/schedule/?group=%CF%CA%D1-7&even=' + str(schedule[event.object.text]))
 						json.dump(a1, ofile)
@@ -77,7 +78,7 @@ class Server:
 
 						self.send_message(event.object.peer_id, "Расписание изменено на " + alert_schedule)
 					else:
-						self.send_message(event.object.peer_id, "Эта команда вам недоступна")
+						self.send_message(event.object.peer_id, "У вас нет доступа к данной команде")
 
 				ofile = open(filename, 'r')
 				json_data = json.load(ofile)
@@ -95,8 +96,26 @@ class Server:
 					self.send_message(event.object.peer_id, "Сейчас установлено " + str(status) + " расписание")
 
 				rtime = datetime.datetime.today().time()
-				times = datetime.time(7)
+				times = datetime.time(12)
 
+				if event.type == VkBotEventType.MESSAGE_NEW and "!кик" in event.object.text.lower():
+					if event.from_chat:
+						get_adm = self.get_user_admins(event.object.peer_id)
+						for ttt in get_adm['items']:
+							fff = ttt['chat_settings']
+							sss = fff['owner_id']
+							sas = fff['admin_ids']
+							if event.object.from_id == sss or event.object.from_id in sas:
+								try:
+									userrr = event.object.text.lower().split("id")[1]
+									userr = userrr.split('|')
+									self.vk_api.messages.removeChatUser(chat_id=event.chat_id, user_id=userr[0])
+								except IndexError:
+									self.send_message(event.object.peer_id, "Вы указали неверный аргумент. \nВведите \"!кик @Имя_человека\" или \"!кик id + id_человека\"")
+							else:
+								self.send_message(event.object.peer_id, "У вас нет доступа к данной команде")
+					else:
+						self.send_message(event.object.peer_id, 'Данная команда доступна только в групповом чате')
 
 				que = ['может сразу на завод пойдешь?', 'у меня нет слов, одни междометия', 'пожалуй, я промолчу', 'ну тут только в окно']
 				iqseventyn = ['Не удивительно, что ты учишься в АПЭТ', 'Ну, бывает и хуже', 'Хотя бы не в минус', 'Странно, что ты вообще можешь связать речь..', 'IQ не зубы, еще вырастет']
@@ -108,21 +127,9 @@ class Server:
 
 				daus = {'!расп понедельник': 1, '!расп вторник': 2, '!расп среда': 3, '!расп четверг': 4, '!расп пятница': 5, '!расп суббота': 6}
 
-
 				if event.type == VkBotEventType.MESSAGE_NEW and (event.object.text).lower() == "!расп":
 					if day <= 6 and rtime < times:
-						for tr in soup.find_all('tr', at_col = 't' + str(day)):
-							zan = tr.find('td', class_ = 'sch_ed')#Парсим занятие
-							kab = tr.find('td', class_ = 'sch_ed sch_room')#Парсим кабинеты
-							zan2 = tr.find('td', class_ = 'sch_all')#Парсим занятие, если их 2
-							kab2 = tr.find('td', class_ = 'sch_all sch_room')#Парсим кабинеты, если их 2
-							prep2 = tr.find('a')#Парсим преподавателей
-							prep = tr.find('a')#Парсим преподавателей
-
-							if zan == None:
-								text_schedule += zan2.text + '\nКабинет: ' + kab2.text + '\nПреподаватель: ' + prep2.text + '\n\n'
-							else:
-								text_schedule += zan.text + '\nКабинет: ' + kab.text + '\nПреподаватель: ' + prep.text +  '\n\n'
+						trtr = command_enum.ttest(0)
 						if day == 6:
 							self.send_message(event.object.peer_id, subb + '\n\n' + text_schedule)
 						else:
@@ -130,33 +137,26 @@ class Server:
 
 					elif day == 7:
 						for tr in soup.find_all('tr', at_col = 't1'):
-							zan = tr.find('td', class_ = 'sch_ed')#Парсим занятие
-							kab = tr.find('td', class_ = 'sch_ed sch_room')#Парсим кабинеты
-							zan2 = tr.find('td', class_ = 'sch_all')#Парсим занятие, если их 2
-							kab2 = tr.find('td', class_ = 'sch_all sch_room')#Парсим кабинеты, если их 2
-							prep2 = tr.find('a')#Парсим преподавателей
-							prep = tr.find('a')#Парсим преподавателей
+							try:
+								zan = tr.find('td', class_ = 'sch_ed')#Парсим занятие
+								kab = tr.find('td', class_ = 'sch_ed sch_room')#Парсим кабинеты
+								zan2 = tr.find('td', class_ = 'sch_all')#Парсим занятие, если их 2
+								kab2 = tr.find('td', class_ = 'sch_all sch_room')#Парсим кабинеты, если их 2
+								prep2 = tr.find('a')#Парсим преподавателей
+								#prep = tr.find('a').findNext('a')#Парсим преподавателей
 
-							if zan == None:
-								text_schedule += zan2.text + '\nКабинет: ' + kab2.text + '\nПреподаватель: ' + prep2.text + '\n\n'
-							else:
-								text_schedule += zan.text + '\nКабинет: ' + kab.text + '\nПреподаватель: ' + prep.text +  '\n\n'
+								if zan == None:
+									text_schedule += zan2.text + '\nКабинет: ' + kab2.text + '\nПреподаватель: ' + prep2.text + '\n\n'
+								else:
+									text_schedule += zan.text + '\nКабинет: ' + kab.text + '\nПреподаватель: ' + prep2.text + '\n\n'
+							except AttributeError:
+								prep = ""
+								prep2 = ""
 
 						self.send_message(event.object.peer_id, bydn + '\n\n' + text_schedule)
 
 					else:
-						for tr in soup.find_all('tr', at_col = 't' + str(day + 1)):
-							zan = tr.find('td', class_ = 'sch_ed')#Парсим занятие
-							kab = tr.find('td', class_ = 'sch_ed sch_room')#Парсим кабинеты
-							zan2 = tr.find('td', class_ = 'sch_all')#Парсим занятие, если их 2
-							kab2 = tr.find('td', class_ = 'sch_all sch_room')#Парсим кабинеты, если их 2
-							prep2 = tr.find('a')#Парсим преподавателей
-							prep = tr.find('a')#Парсим преподавателей
-
-							if zan == None:
-								text_schedule += zan2.text + '\nКабинет: ' + kab2.text + '\nПреподаватель: ' + prep2.text + '\n\n'
-							else:
-								text_schedule += zan.text + '\nКабинет: ' + kab.text + '\nПреподаватель: ' + prep.text +  '\n\n'
+						self.ttest(1)
 						if day == 5 and rtime > times:
 							self.send_message(event.object.peer_id, subb + '\n\n' + text_schedule)
 						else:
@@ -164,17 +164,21 @@ class Server:
 
 				elif event.type == VkBotEventType.MESSAGE_NEW and event.object.text in daus:
 					for tr in soup.find_all('tr', at_col = 't' + str(daus[event.object.text])):
-						zan = tr.find('td', class_ = 'sch_ed')#Парсим занятие
-						kab = tr.find('td', class_ = 'sch_ed sch_room')#Парсим кабинеты
-						zan2 = tr.find('td', class_ = 'sch_all')#Парсим занятие, если их 2
-						kab2 = tr.find('td', class_ = 'sch_all sch_room')#Парсим кабинеты, если их 2
-						prep2 = tr.find('a')#Парсим преподавателей
-						prep = tr.find('a')#Парсим преподавателей
+						try:
+							zan = tr.find('td', class_ = 'sch_ed')#Парсим занятие
+							kab = tr.find('td', class_ = 'sch_ed sch_room')#Парсим кабинеты
+							zan2 = tr.find('td', class_ = 'sch_all')#Парсим занятие, если их 2
+							kab2 = tr.find('td', class_ = 'sch_all sch_room')#Парсим кабинеты, если их 2
+							prep2 = tr.find('a')#Парсим преподавателей
+							#prep = tr.find('a').findNext('a')#Парсим преподавателей
 
-						if zan == None:
-							text_schedule += zan2.text + '\nКабинет: ' + kab2.text + '\nПреподаватель: ' + prep2.text + '\n\n'
-						else:
-							text_schedule += zan.text + '\nКабинет: ' + kab.text + '\nПреподаватель: ' + prep.text +  '\n\n'
+							if zan == None:
+								text_schedule += zan2.text + '\nКабинет: ' + kab2.text + '\nПреподаватель: ' + prep2.text + '\n\n'
+							else:
+								text_schedule += zan.text + '\nКабинет: ' + kab.text + '\nПреподаватель: ' + prep2.text  + '\n\n'
+						except AttributeError:
+							prep = ""
+							prep2 = ""
 
 					self.send_message(event.object.peer_id, bydn + '\n\n' + text_schedule)
 
@@ -199,27 +203,22 @@ class Server:
 
 				elif event.type == VkBotEventType.MESSAGE_NEW and (event.object.text).lower() == "!созвать всех":
 					if event.from_chat:
-						get_adm = self.get_user_admins(event.object.peer_id)
-						for ttt in get_adm['items']:
-							fff = ttt['chat_settings']
-							sss = fff['owner_id']
-							sas = fff['admin_ids']
-							if event.object.from_id == sss or event.object.from_id == 134371625 or event.object.from_id in sas:
-								get_user_ids = self.get_user_id(event.object.peer_id)
-								users = ''
-								for screen_name in get_user_ids['profiles']:
-									try:
-										ids = screen_name['screen_name']
-										users += '@' + str(ids) + ' '
-									except KeyError:
-										ids == screen_name['deactivated']
-										continue
-								self.send_message(event.object.peer_id, 'Вы были созваны для очень важного (нет) дела\n' + str(users))
-							else:
-								self.send_message(event.object.peer_id, 'У вас нет доступа к данной команде')
+						if event.object.from_id == 134371625:
+							get_user_ids = self.get_user_id(event.object.peer_id)
+							users = ''
+							for screen_name in get_user_ids['profiles']:
+								try:
+									username = screen_name['first_name']
+									ids = screen_name['screen_name']
+									users += '@' + str(ids) + '(' + username + ')' + ' '
+								except KeyError:
+									ids == screen_name['deactivated']
+									continue
+							self.send_message(event.object.peer_id, 'Вы были созваны для очень важного (нет) дела\n' + str(users))
+						else:
+							self.send_message(event.object.peer_id, 'У вас нет доступа к данной команде')
 					else:
 						self.send_message(event.object.peer_id, 'Данная команда доступна только в групповом чате')
-
 
 				elif event.type == VkBotEventType.MESSAGE_NEW and (event.object.text).lower() == "монетка":
 					username = self.get_user_name(event.object.from_id)
