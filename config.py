@@ -1,1 +1,1 @@
-vk_api_token = "c9712b3aa1ad652d877b070d46c9ad1a9f8299b160d8536f1a4968d0b730cbca831baee39db9bddf42f36"
+vk_api_token = ""
