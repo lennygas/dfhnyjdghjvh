@@ -1,0 +1,223 @@
+body
+{
+	background: no-repeat;
+    -moz-background-size: 100%; /* Firefox 3.6+ */
+    -webkit-background-size: 100%; /* Safari 3.1+ и Chrome 4.0+ */
+    -o-background-size: 100%; /* Opera 9.6+ */
+    background-size: 100%; /* Cовременные браузеры */;
+	opacity:0.9;
+	overflow:  hidden;
+}
+
+.fon {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #FFF;
+  display: inline-block;
+  cursor: pointer;
+  overflow: hidden;
+  margin: 2px;
+}
+
+/* !w!inter_зима */
+body.w1 {
+  background-image: url("/schedule/style/fons/zima1.jpg");
+}
+
+body.w2 {
+  background-image: url("/schedule/style/fons/zima2.jpg");
+}
+
+body.w3 {
+  background-image: url("/schedule/style/fons/zima3.jpg");
+}
+
+body.w4 {
+  background-image: url("/schedule/style/fons/zima4.jpg");
+}
+
+/* !sp!ring_весна */
+body.sp1 {
+  background-image: url("/schedule/style/fons/vesna1.jpg");
+}
+
+body.sp2 {
+  background-image: url("/schedule/style/fons/vesna2.jpg");
+}
+
+body.sp3 {
+  background-image: url("/schedule/style/fons/vesna3.jpg");
+}
+
+body.sp4 {
+  background-image: url("/schedule/style/fons/vesna4.jpg");
+}
+
+
+/* !sa!mmer_лето */
+body.sa1 {
+  background-image: url("/schedule/style/fons/leto1.jpg");
+}
+
+body.sa2 {
+  background-image: url("/schedule/style/fons/leto2.jpg");
+}
+
+body.sa3 {
+  background-image: url("/schedule/style/fons/leto3.jpg");
+}
+
+body.sa4 {
+  background-image: url("/schedule/style/fons/leto4.jpg");
+}
+
+/* !au!tumn_осень */
+body.au1 {
+  background-image: url("/schedule/style/fons/osen1.jpg");
+}
+
+body.au2 {
+  background-image: url("/schedule/style/fons/osen2.jpg");
+}
+
+body.au3 {
+  background-image: url("/schedule/style/fons/osen3.jpg");
+}
+
+body.au4 {
+  background-image: url("/schedule/style/fons/osen4.jpg");
+}
+
+
+
+
+
+
+
+td.sch_head
+{
+	border: 1pt solid black;
+	padding: 3px;
+	font-weight: 600;
+	text-align: center;
+	color:666666;
+}
+td.sch_all
+{
+	border: 1pt solid black;
+	padding: 3px;
+	text-align: left;
+}
+td.sch_ed
+{
+	border: 1pt solid black;
+	padding: 3px;
+	text-align: left;
+	background-color: #FF9999;
+}
+td.sch_room
+{
+	text-align: center;
+	max-width: 65px;
+}
+div.sch_div
+{
+	position: absolute;
+	width: 100%; 
+	margin-top: 25px;
+	margin: 0 auto;
+}
+div.sch_dif
+{
+	font-family: Verdana, Arial, Helvetica, sans-serif; 
+    font-size: 11pt; /* Размер шрифта в пунктах */ 
+}
+
+
+
+div.sch_back
+{
+	padding-left: 5px;
+	position: relative;
+}
+span.sch_str_text
+{
+	color:333333;
+	font-weight: 600;
+}
+div.sch_example1
+{
+	background-color: LightBlue;
+	width: 17px;
+	height: 17px;
+	border: 1px solid black;
+}
+div.sch_example2
+{
+	background-color: #FF9999;
+	width: 17px;
+	height: 17px;
+	border: 1px solid black;
+}
+tr.sch_sel0
+{
+	background-color: LightBlue;
+}
+tr.sch_sel1
+{
+	background-color: #F5F5F5;
+}
+tr.sch_sel2
+{
+	background-color: #FFE4E1;
+}
+tr.sch_ras_ball1
+{
+	background-color: #FFE4E1;
+	text-decoration: underline;
+}
+tr.sch_ras_ball2
+{
+	background-color: white;
+}
+A
+{
+	text-decoration: none;
+	color: black;
+	font-family: Arial;
+	font-size: 10pt;
+}
+A:hover
+{
+	color: red;
+}
+font
+{
+	font-size: 10pt;
+	font-family: Tahoma;
+}
+body
+{
+	font-family: Tahoma;
+	font-size: 10pt;
+}
+td
+{
+	font-family: Tahoma;
+	font-size: 10pt;
+	cursor: default;
+}
+table
+{
+	background:#FFFFFF;
+}
+
+#some 
+{
+	height: 100px;
+	width: 280px;
+	overflow: auto;
+	background-color: #ccc;
+	padding: 8px;
+}
+

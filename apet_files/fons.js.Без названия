@@ -1,0 +1,27 @@
+window.onload = function() {
+var backgroundClass = 'n1';
+//* Сохранение выбранного фона в localStorage
+function saveBackground() {
+  localStorage.setItem("object", backgroundClass);
+}
+//* Чтение фона из localStorage и применение
+function getBackground() {
+  if (localStorage.getItem("object")) {
+    backgroundClass = localStorage.getItem("object");
+  }
+  appendBackground();
+}
+//* Применение фона к body
+function appendBackground() {
+  document.body.className = backgroundClass;
+}
+getBackground();
+//* обработка кликов по образцам
+document.querySelectorAll('.fon').forEach(function(el) {
+	el.addEventListener('click', function() {
+  	backgroundClass = this.getAttribute('data-class');
+  	saveBackground();
+    appendBackground()
+  });
+});
+}

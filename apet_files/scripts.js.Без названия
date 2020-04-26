@@ -1,0 +1,153 @@
+function sel_row(atr, cN, para, paraS, day, curs)
+{
+	var i;
+	var rasp;
+	if (day == '6')
+		rasp = 'rasp_sub_all';
+	else if (curs == '1')
+		rasp = 'rasp_bud1_all';
+    else if (curs == '5')
+		rasp = 'rasp_budpp_all';	
+	else
+		rasp = 'rasp_bud_all';
+	var rasp = document.getElementById(rasp);
+	for (i=1;i<=rasp.rows.length - 1; i++)
+	{
+		if (rasp.rows[i].getAttribute('name') == para)
+			rasp.rows[i].className = paraS;
+	}
+	var sch_tab = document.getElementById('schedule');
+	for (i=1;i<=sch_tab.rows.length - 1; i++)
+	{
+		if (sch_tab.rows[i].getAttribute('at_col') == atr)
+			sch_tab.rows[i].className = cN;
+	}
+}
+
+function timer(day)
+{	
+	var obj = document.getElementById('timer_inp');
+	if (day < 6)
+	{
+		if ((start_day > 28800) && (start_day < 32400))
+		{
+			cur_sec = 32400 - start_day;	
+			wh = 'начала';
+		}
+		else if ((start_day > 32400) && (start_day < 37800))
+		{
+			cur_sec = 37800 - start_day;
+			wh = 'конца';
+		}
+		else if ((start_day > 37800) && (start_day < 38400))
+		{
+			cur_sec = 38400 - start_day;	
+			wh = 'начала';
+		}
+		else if ((start_day > 38400) && (start_day < 43800))
+		{
+			cur_sec = 43800 - start_day;	
+			wh = 'конца';
+		}
+		else if ((start_day > 43800) && (start_day < 46200))
+		{
+			cur_sec = 46200 - start_day;	
+			wh = 'начала';
+		}
+		else if ((start_day > 46200) && (start_day < 51000))
+		{
+			cur_sec = 51000 - start_day;
+			wh = 'конца';
+		}
+		else if ((start_day > 51000) && (start_day < 51600))
+		{
+			cur_sec = 51600 - start_day;	
+			wh = 'начала';
+		}
+		else if ((start_day > 51600) && (start_day < 56400))
+		{
+			cur_sec = 56400 - start_day;
+			wh = 'конца';
+		}
+		else if ((start_day > 56400) && (start_day < 57000))
+		{
+			cur_sec = 57000 - start_day;	
+			wh = 'начала';
+		}
+		else if ((start_day > 57000) && (start_day < 61800))
+		{
+			cur_sec = 61800 - start_day;
+			wh = 'конца';
+		}
+	}
+	else if (day == 6)
+	{
+		if ((start_day > 28800) && (start_day < 32400))
+		{
+			cur_sec = 32400 - start_day;	
+			wh = 'начала';
+		}
+		else if ((start_day > 32400) && (start_day < 36600))
+		{
+			cur_sec = 36600 - start_day;
+			wh = 'конца';
+		}
+		else if ((start_day > 36600) && (start_day < 37200))
+		{
+			cur_sec = 37200 - start_day;	
+			wh = 'начала';
+		}
+		else if ((start_day > 37200) && (start_day < 41400))
+		{
+			cur_sec = 41400 - start_day;	
+			wh = 'конца';
+		}
+		else if ((start_day > 41400) && (start_day < 42000))
+		{
+			cur_sec = 42000 - start_day;	
+			wh = 'начала';
+		}
+		else if ((start_day > 42000) && (start_day < 46800))
+		{
+			cur_sec = 46800 - start_day;
+			wh = 'конца';
+		}
+		else if ((start_day > 46800) && (start_day < 47400))
+		{
+			cur_sec = 47400 - start_day;	
+			wh = 'начала';
+		}
+		else if ((start_day > 47400) && (start_day < 51000))
+		{
+			cur_sec = 51000 - start_day;
+			wh = 'конца';
+		}
+		else if ((start_day > 51000) && (start_day < 51600))
+		{
+			cur_sec = 51600 - start_day;	
+			wh = 'начала';
+		}
+		else if ((start_day > 51600) && (start_day < 55800))
+		{
+			cur_sec = 55800 - start_day;
+			wh = 'конца';
+		}
+	}
+	h = cur_sec / 3600 >> 0;	
+	m = (cur_sec - h * 3600) / 60 >> 0;
+	s = cur_sec - h * 3600 - m * 60;
+window.onload = function() {	
+	obj.innerHTML = '&nbsp; До ' + wh + ' пары: ' + h + ':';
+	if (m < 10)
+		obj.innerHTML += '0';
+	obj.innerHTML += m + ':';
+	if (s < 10)
+		obj.innerHTML += '0';
+	obj.innerHTML += s;
+	start_day++;
+	if ((start_day > 28800) && (start_day < 61800))
+		setTimeout('timer(' + day + ')',1000);
+	else
+		document.getElementById('timer_inp').innerHTML = '&nbsp;Сейчас занятий нет';
+	}
+}
