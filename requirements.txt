@@ -1,6 +1,6 @@
 beautifulsoup4==4.6.0
 geojson==2.3.0
 idna==2.6
-lxml==4.2.5
+lxml==4.6.2
 requests==2.18.4
 vk-api==11.3.0
